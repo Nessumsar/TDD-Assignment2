@@ -6,6 +6,7 @@ import org.example.implementations.PurchaseStoreImpl;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -30,21 +31,22 @@ public class PurchaseStoreStub extends PurchaseStoreImpl {
                .filter(purchase -> startDate.before(purchase.date) )
                .filter(purchase -> endDate.after(purchase.date))
                .toArray(Purchase[]::new);
-
        if (result.length == 0){
           throw new NullPointerException();
        }
-
         return result;
     }
 
     @Override
     public Purchase[] getPurchasesByCategory(Calendar startDate, Calendar endDate, int catId) {
-        return super.getPurchasesByCategory(startDate, endDate, catId);
+        var purchases = getPurchases(startDate, endDate);
+        return Arrays.stream(purchases)
+                .filter(purchase -> purchase.categoryId == catId)
+                .toArray(Purchase[]::new);
     }
 
     @Override
     public Category[] getAllCategories() {
-        return super.getAllCategories();
+        return categories.toArray(Category[]::new);
     }
 }
