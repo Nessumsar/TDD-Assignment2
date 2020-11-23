@@ -2,17 +2,12 @@ package org.example;
 
 import org.example.entities.Category;
 import org.example.entities.DatePurchase;
-import org.example.entities.Purchase;
-import org.example.implementations.PurchaseManagerImpl;
 import org.example.implementations.PurchaseManagerWithDate;
-import org.example.implementations.PurchaseStoreImpl;
 import org.example.implementations.PurchaseStoreWithDate;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.Calendar;
 import java.util.Date;
 
 import static org.mockito.Mockito.*;
@@ -34,14 +29,11 @@ public class MockitoTest {
         cut = null;
     }
 
-
     @Test
     public void testSumOfMonthFebruarySuccess() {
-
         Date purchaseDate = new Date(2020, 1, 13, 0, 0, 0);;
         Date startDate = new Date(2020, 1, 1, 0, 0, 0);
         Date endDate = new Date(2020, 1, 29, 23, 59 ,59);
-
 
         when(store.getPurchases(startDate, endDate))
                 .thenReturn(new DatePurchase[]{
@@ -68,15 +60,12 @@ public class MockitoTest {
         Date startDate = new Date(2019, 11, 31, 0, 0, 0);
         Date endDate = new Date(2021, 0, 1, 0, 0, 0);
 
-
         when(store.getPurchases(startDate, endDate))
                 .thenReturn(new DatePurchase[]{
                         new DatePurchase(0, purchaseDate, 2.0f, "First", 0),
                         new DatePurchase(1, purchaseDate, 2.0f, "Second", 1)
                 });
         Assertions.assertArrayEquals(expected, cut.monthlyAverage(2020));
-
-
     }
 
 
@@ -91,12 +80,10 @@ public class MockitoTest {
                 new Category(0, "Cool"),
                 new Category(1, "Proper")
         });
-
         when(store.getPurchasesByCategory(startDate, endDate, 0))
                 .thenReturn(new DatePurchase[]{
                         new DatePurchase(0, purchaseDate, 2.0f, "First", 0)
                 });
-
         when(store.getPurchasesByCategory(startDate, endDate, 1))
                 .thenReturn(new DatePurchase[]{
                         new DatePurchase(1, purchaseDate, 2.0f, "Second", 1)

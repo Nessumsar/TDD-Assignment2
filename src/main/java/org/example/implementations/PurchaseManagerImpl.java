@@ -1,10 +1,8 @@
 package org.example.implementations;
 
-
 import org.example.dao.PurchaseManagerDao;
 import org.example.entities.Purchase;
 
-import java.util.Arrays;
 import java.util.Calendar;
 
 public class PurchaseManagerImpl implements PurchaseManagerDao {
@@ -35,14 +33,12 @@ public class PurchaseManagerImpl implements PurchaseManagerDao {
         Calendar endDate = Calendar.getInstance();
         startDate.set(year, month-1, 1, 0, 0, 0);
         endDate.set(year, month-1, days, 23, 59, 59);
-        System.out.println(startDate.getTime());
-        System.out.println(endDate.getTime());
+
         Purchase[] purchases = store.getPurchases(startDate, endDate);
         float sum = 0.0f;
 
-
-        for (int i=0; i<purchases.length; i++){
-           sum += purchases[i].amount;
+        for (Purchase purchase : purchases) {
+            sum += purchase.amount;
         }
 
         return sum;
@@ -76,6 +72,7 @@ public class PurchaseManagerImpl implements PurchaseManagerDao {
         Calendar endDate = Calendar.getInstance();
         startDate.set(year-1, 11, 31, 0, 0, 0);
         endDate.set(year+1, 0, 1, 0, 0, 0);
+
         var categories = store.getAllCategories();
         var result = new float[categories.length];
 

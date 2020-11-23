@@ -4,12 +4,10 @@ import org.example.entities.Category;
 import org.example.entities.Purchase;
 import org.example.implementations.PurchaseStoreImpl;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
-
 
 public class PurchaseStoreStub extends PurchaseStoreImpl {
 

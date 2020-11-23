@@ -17,6 +17,7 @@ public class PurchaseManagerWithDate {
 
     public float sumOfMonth(int year, int month) {
         int days = 0;
+        float sum = 0.0f;
         if (month > 12 || year > Calendar.getInstance().get(Calendar.YEAR)){
             throw new IllegalArgumentException();
         } else if (month == 4 || month == 6 || month == 9 || month == 11){
@@ -31,21 +32,16 @@ public class PurchaseManagerWithDate {
         }
         Date startDate = new Date(year, month-1, 1, 0, 0, 0);
         Date endDate = new Date(year, month-1, days, 23, 59, 59);
-
         var purchases = store.getPurchases(startDate, endDate);
-        float sum = 0.0f;
 
-
-        for (int i=0; i<purchases.length; i++){
-            sum += purchases[i].amount;
+        for (DatePurchase purchase : purchases) {
+            sum += purchase.amount;
         }
-
         return sum;
     }
 
 
     public float[] monthlyAverage(int year) {
-
         Date startDate = new Date(year-1, 11, 31, 0, 0, 0);
         Date endDate = new Date(year+1, 0, 1, 0, 0, 0);
 
@@ -82,6 +78,5 @@ public class PurchaseManagerWithDate {
         }
         return result;
     }
-
 
 }

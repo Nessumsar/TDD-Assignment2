@@ -85,7 +85,6 @@ public class PurchaseManagerTest {
         store.addPurchase(purchase1);
         store.addPurchase(purchase2);
 
-
         float[] expected = new float[]{2.0f, 2.0f};
         Assertions.assertArrayEquals(expected, cut.yearlyAveragePerCategory(2020));
     }
